@@ -14,6 +14,10 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/admin/article' => [[['_route' => 'app_article_index', '_controller' => 'App\\Controller\\Admin\\ArticleController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/admin/article/new' => [[['_route' => 'app_article_new', '_controller' => 'App\\Controller\\Admin\\ArticleController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/admin/blog/catégorie' => [[['_route' => 'app_blog_category_index', '_controller' => 'App\\Controller\\Admin\\BlogCategoryController::index'], null, ['GET' => 0], null, false, false, null]],
+        '/admin/blog/catégorie/new' => [[['_route' => 'app_blog_category_new', '_controller' => 'App\\Controller\\Admin\\BlogCategoryController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/admin/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/a-propos' => [[['_route' => 'app_about', '_controller' => 'App\\Controller\\HomeController::about'], null, null, null, false, false, null]],
@@ -43,6 +47,18 @@ return [
                         .')'
                     .')'
                 .')'
+                .'|/admin/(?'
+                    .'|article/([^/]++)(?'
+                        .'|(*:231)'
+                        .'|/edit(*:244)'
+                        .'|(*:252)'
+                    .')'
+                    .'|blog/catégorie/([^/]++)(?'
+                        .'|(*:288)'
+                        .'|/edit(*:301)'
+                        .'|(*:309)'
+                    .')'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -53,8 +69,14 @@ return [
         148 => [[['_route' => '_profiler_router', '_controller' => 'web_profiler.controller.router::panelAction'], ['token'], null, null, false, false, null]],
         168 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         181 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
-        191 => [
-            [['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null],
+        191 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
+        231 => [[['_route' => 'app_article_show', '_controller' => 'App\\Controller\\Admin\\ArticleController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        244 => [[['_route' => 'app_article_edit', '_controller' => 'App\\Controller\\Admin\\ArticleController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        252 => [[['_route' => 'app_article_delete', '_controller' => 'App\\Controller\\Admin\\ArticleController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        288 => [[['_route' => 'app_blog_category_show', '_controller' => 'App\\Controller\\Admin\\BlogCategoryController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        301 => [[['_route' => 'app_blog_category_edit', '_controller' => 'App\\Controller\\Admin\\BlogCategoryController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        309 => [
+            [['_route' => 'app_blog_category_delete', '_controller' => 'App\\Controller\\Admin\\BlogCategoryController::delete'], ['id'], ['POST' => 0], null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
