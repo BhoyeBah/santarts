@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<main class="main-container">
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Titre de la Page</h1>
+            <p class="page-subtitle">Une petite description ou un breadcrumb ici</p>
+            <nav class="breadcrumb">
+                <ul>
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="index.html">About</a>
+                    </li>
+                    <!-- <li class="breadcrumb-item">
+                        Détails du Magasin
+                    </li> -->
+                </ul>
+
+            </nav>
+        </div>
+    </section>
+
+    <section class="product" id="product">
+        <h1 class="heading wow animate__animated animate__fadeInUp animate__delay-0_3s">Nos produits</h1>
+        <p class="paragraph wow animate__animated animate__fadeInUp animate__delay-0_4s">
+            Necessitatibus eius consequatur ex aliquid fuga eum quidem sint consectetur velit
+        </p>
+
+        <div class="container">
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_2s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-1.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_3s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-2.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_4s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-3.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_5s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-4.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_6s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-5.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+
+            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_7s">
+                <div class="image">
+                    <img src="assets/images/products/product-img-5.jpg" alt="" width="150px">
+                    <h3><a href="#">Chaussure</a></h3>
+                </div>
+                <p class="price">Prix : <span>5000 CFA</span></p>
+                <div class="btn-buy">Acheter</div>
+            </div>
+        </div>
+    </section>
+</main>
+
+{% endblock %}
