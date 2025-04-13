@@ -166,17 +166,20 @@
             </p>
 
             <div class="container">
+                {% for article in articles %}
                 <div class="card wow animate__animated animate__fadeInUp animate__delay-0_2s">
                     <div class="card-imag">
-                        <img src="assets/images/blog/blog-2.jpg" alt="blog image">
+                        <img src="/uploads/blog/{{ article.image }}" alt="{{ article.title }}">
                         <div class="image-overlay">
-                            <a href="#" class="read-more-btn">Lire plus</a>
+                            <a href="{{ path('app_single_article', {'id': article.id }) }}" class="read-more-btn">Lire plus</a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <span class="tag tag-tech">Technologie</span>
-                        <h4>How to stay fresh ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
+                        <span class="tag tag-tech">{{ article.category.name }}</span>
+                        <h4>{{ article.title }}</h4>
+                        <p>
+                            {{ article.description|u.truncate(100,'...', false) }}
+                        </p>
                         <div class="user">
                             <img src="assets/images/blog/blog-author-2.jpg" alt="image utilisateur">
                             <div class="user-info">
@@ -186,90 +189,8 @@
                         </div>
                     </div>
                 </div>
+                {% endfor %}
 
-                <div class="card wow animate__animated animate__fadeInUp animate__delay-0_4s">
-                    <div class="card-imag">
-                        <img src="assets/images/blog/blog-1.jpg" alt="blog image">
-                        <div class="image-overlay">
-                            <a href="#" class="read-more-btn">Lire plus</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <span class="tag tag-tech">Technologie</span>
-                        <h4>How to stay fresh ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                        <div class="user">
-                            <img src="assets/images/blog/blog-author-2.jpg" alt="image utilisateur">
-                            <div class="user-info">
-                                <h5>Bah Mamadou</h5>
-                                <small>4h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card wow animate__animated animate__fadeInUp animate__delay-0_6s">
-                    <div class="card-imag">
-                        <img src="assets/images/blog/blog-2.jpg" alt="blog image">
-                        <div class="image-overlay">
-                            <a href="#" class="read-more-btn">Lire plus</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <span class="tag tag-tech">Technologie</span>
-                        <h4>How to stay fresh ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                        <div class="user">
-                            <img src="assets/images/blog/blog-author-3.jpg" alt="image utilisateur">
-                            <div class="user-info">
-                                <h5>Bah Mamadou</h5>
-                                <small>4h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card wow animate__animated animate__fadeInUp animate__delay-0_8s">
-                    <div class="card-imag">
-                        <img src="assets/images/blog/blog-3.jpg" alt="blog image">
-                        <div class="image-overlay">
-                            <a href="#" class="read-more-btn">Lire plus</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <span class="tag tag-tech">Technologie</span>
-                        <h4>How to stay fresh ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                        <div class="user">
-                            <img src="assets/images/blog/blog-author-4.jpg" alt="image utilisateur">
-                            <div class="user-info">
-                                <h5>Bah Mamadou</h5>
-                                <small>4h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card wow animate__animated animate__fadeInUp animate__delay-1s">
-                    <div class="card-imag">
-                        <img src="assets/images/blog/blog-4.jpg" alt="blog image">
-                        <div class="image-overlay">
-                            <a href="#" class="read-more-btn">Lire plus</a>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <span class="tag tag-tech">Technologie</span>
-                        <h4>How to stay fresh ?</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                        <div class="user">
-                            <img src="assets/images/blog/blog-author-2.jpg" alt="image utilisateur">
-                            <div class="user-info">
-                                <h5>Bah Mamadou</h5>
-                                <small>4h ago</small>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 

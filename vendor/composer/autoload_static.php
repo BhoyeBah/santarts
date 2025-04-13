@@ -23,9 +23,9 @@ class ComposerStaticInit54c05e64f01f49eb136e9af7b3075bdd
         '9d2b9fc6db0f153a0a149fefb182415e' => __DIR__ . '/..' . '/symfony/polyfill-php84/bootstrap.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '6a47392539ca2329373e0d33e1dba053' => __DIR__ . '/..' . '/symfony/polyfill-intl-icu/bootstrap.php',
+        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '92c8763cd6170fce6fcfe7e26b4e8c10' => __DIR__ . '/..' . '/symfony/phpunit-bridge/bootstrap.php',
-        'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -44,6 +44,7 @@ class ComposerStaticInit54c05e64f01f49eb136e9af7b3075bdd
         'T' => 
         array (
             'Twig\\Extra\\TwigExtraBundle\\' => 27,
+            'Twig\\Extra\\String\\' => 18,
             'Twig\\' => 5,
         ),
         'S' => 
@@ -138,6 +139,11 @@ class ComposerStaticInit54c05e64f01f49eb136e9af7b3075bdd
             'Metadata\\' => 9,
             'Masterminds\\' => 12,
         ),
+        'K' => 
+        array (
+            'Knp\\Component\\' => 14,
+            'Knp\\Bundle\\PaginatorBundle\\' => 27,
+        ),
         'E' => 
         array (
             'Egulias\\EmailValidator\\' => 23,
@@ -189,6 +195,10 @@ class ComposerStaticInit54c05e64f01f49eb136e9af7b3075bdd
         'Twig\\Extra\\TwigExtraBundle\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/extra-bundle',
+        ),
+        'Twig\\Extra\\String\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/string-extra',
         ),
         'Twig\\' => 
         array (
@@ -525,6 +535,14 @@ class ComposerStaticInit54c05e64f01f49eb136e9af7b3075bdd
         'Masterminds\\' => 
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
+        ),
+        'Knp\\Component\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-components/src/Knp/Component',
+        ),
+        'Knp\\Bundle\\PaginatorBundle\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/knplabs/knp-paginator-bundle/src',
         ),
         'Egulias\\EmailValidator\\' => 
         array (

@@ -45,6 +45,7 @@ return [
     'app_blog' => [[], ['_controller' => 'App\\Controller\\HomeController::blog'], [], [['text', '/blog']], [], [], []],
     'app_gallery' => [[], ['_controller' => 'App\\Controller\\HomeController::gallery'], [], [['text', '/gallery']], [], [], []],
     'app_contact' => [[], ['_controller' => 'App\\Controller\\HomeController::contact'], [], [['text', '/contact']], [], [], []],
+    'app_single_article' => [['id'], ['_controller' => 'App\\Controller\\SingleArticleController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/Blog/article']], [], [], []],
     'App\Controller\Admin\ArticleController::index' => [[], ['_controller' => 'App\\Controller\\Admin\\ArticleController::index'], [], [['text', '/admin/article']], [], [], []],
     'App\Controller\Admin\ArticleController::new' => [[], ['_controller' => 'App\\Controller\\Admin\\ArticleController::new'], [], [['text', '/admin/article/new']], [], [], []],
     'App\Controller\Admin\ArticleController::show' => [['id'], ['_controller' => 'App\\Controller\\Admin\\ArticleController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/article']], [], [], []],
@@ -66,6 +67,7 @@ return [
     'App\Controller\Admin\ProductController::show' => [['id'], ['_controller' => 'App\\Controller\\Admin\\ProductController::show'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/produit']], [], [], []],
     'App\Controller\Admin\ProductController::edit' => [['id'], ['_controller' => 'App\\Controller\\Admin\\ProductController::edit'], [], [['text', '/edit'], ['variable', '/', '[^/]++', 'id', true], ['text', '/admin/produit']], [], [], []],
     'App\Controller\Admin\ProductController::delete' => [['id'], ['_controller' => 'App\\Controller\\Admin\\ProductController::delete'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/admin/produit']], [], [], []],
+    'App\Controller\BlogController::index' => [[], ['_controller' => 'App\\Controller\\HomeController::blog'], [], [['text', '/blog']], [], [], []],
     'App\Controller\HomeController::index' => [[], ['_controller' => 'App\\Controller\\HomeController::index'], [], [['text', '/']], [], [], []],
     'App\Controller\HomeController::about' => [[], ['_controller' => 'App\\Controller\\HomeController::about'], [], [['text', '/a-propos']], [], [], []],
     'App\Controller\HomeController::product' => [[], ['_controller' => 'App\\Controller\\HomeController::product'], [], [['text', '/produit']], [], [], []],
@@ -73,4 +75,5 @@ return [
     'App\Controller\HomeController::blog' => [[], ['_controller' => 'App\\Controller\\HomeController::blog'], [], [['text', '/blog']], [], [], []],
     'App\Controller\HomeController::gallery' => [[], ['_controller' => 'App\\Controller\\HomeController::gallery'], [], [['text', '/gallery']], [], [], []],
     'App\Controller\HomeController::contact' => [[], ['_controller' => 'App\\Controller\\HomeController::contact'], [], [['text', '/contact']], [], [], []],
+    'App\Controller\SingleArticleController::index' => [['id'], ['_controller' => 'App\\Controller\\SingleArticleController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/Blog/article']], [], [], []],
 ];

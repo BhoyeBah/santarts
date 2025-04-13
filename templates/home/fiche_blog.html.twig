@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detail du blog{% endblock %}
+
+{% block body %}
+<main class="main-container">
+<section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Titre de la Page</h1>
+            <p class="page-subtitle">Une petite description ou un breadcrumb ici</p>
+            <nav class="breadcrumb">
+                <ul>
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Accueil</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <a href="index.html">About</a>
+                    </li>
+                    <!-- <li class="breadcrumb-item">
+                            Détails du Magasin
+                        </li> -->
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    {{ dump(article) }}
+</main>
+{% endblock %}

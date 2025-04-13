@@ -27,7 +27,7 @@ return [
         '/a-propos' => [[['_route' => 'app_about', '_controller' => 'App\\Controller\\HomeController::about'], null, null, null, false, false, null]],
         '/produit' => [[['_route' => 'app_product', '_controller' => 'App\\Controller\\HomeController::product'], null, null, null, false, false, null]],
         '/evenement' => [[['_route' => 'app_event', '_controller' => 'App\\Controller\\HomeController::evenement'], null, null, null, false, false, null]],
-        '/blog' => [[['_route' => 'app_blog', '_controller' => 'App\\Controller\\HomeController::blog'], null, null, null, false, false, null]],
+        '/blog' => [[['_route' => 'app_blog', '_controller' => 'App\\Controller\\HomeController::blog'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/gallery' => [[['_route' => 'app_gallery', '_controller' => 'App\\Controller\\HomeController::gallery'], null, null, null, false, false, null]],
         '/contact' => [[['_route' => 'app_contact', '_controller' => 'App\\Controller\\HomeController::contact'], null, null, null, false, false, null]],
     ],
@@ -73,6 +73,7 @@ return [
                         .'|(*:410)'
                     .')'
                 .')'
+                .'|/Blog/article/([^/]++)(*:442)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -95,8 +96,9 @@ return [
         361 => [[['_route' => 'app_category_delete', '_controller' => 'App\\Controller\\Admin\\CategoryController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         389 => [[['_route' => 'app_product_show', '_controller' => 'App\\Controller\\Admin\\ProductController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         402 => [[['_route' => 'app_product_edit', '_controller' => 'App\\Controller\\Admin\\ProductController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
-        410 => [
-            [['_route' => 'app_product_delete', '_controller' => 'App\\Controller\\Admin\\ProductController::delete'], ['id'], ['POST' => 0], null, false, true, null],
+        410 => [[['_route' => 'app_product_delete', '_controller' => 'App\\Controller\\Admin\\ProductController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        442 => [
+            [['_route' => 'app_single_article', '_controller' => 'App\\Controller\\SingleArticleController::index'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +17,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(ArticleRepository $articleRepository): Response
     {
-        return $this->render('home/accueil.html.twig');
+        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+        return $this->render('home/accueil.html.twig',[
+            'articles' => $articles,
+        ]);
     }
 
     #[Route('a-propos', name: 'app_about')]
@@ -38,10 +43,14 @@ final class HomeController extends AbstractController
         return $this->render('home/evenement.html.twig');
     }
 
-    #[Route('blog', name: 'app_blog')]
-    public function blog(): Response
+    #[Route('blog', name: 'app_blog', methods: ['POST', 'GET'])]
+    public function blog(Request $request,ArticleRepository $articleRepository, PaginatorInterface $paginator): Response
     {
-        return $this->render('home/blog.html.twig');
+        $data = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+        $articles = $paginator->paginate($data, $request->query->getInt('page', 1), 6);
+        return $this->render('home/blog.html.twig',[
+            'articles' => $articles,
+        ]);
     }
 
     #[Route('gallery', name: 'app_gallery')]
