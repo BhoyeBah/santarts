@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -115,10 +116,10 @@ class Article
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
-
+        
         return $this;
     }
 
@@ -130,6 +131,12 @@ class Article
     public function setImageFile($imageFile)
     {
         $this->imageFile = $imageFile;
+
+        if($imageFile instanceof UploadedFile){
+
+            $this->updatedAt = new \DateTimeImmutable();
+            
+        }
 
         return $this;
     }
