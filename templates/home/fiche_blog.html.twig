@@ -4,7 +4,7 @@
 
 {% block body %}
 <main class="main-container">
-<section class="page-header">
+    <section class="page-header">
         <div class="container">
             <h1 class="page-title">Titre de la Page</h1>
             <p class="page-subtitle">Une petite description ou un breadcrumb ici</p>
@@ -24,6 +24,36 @@
         </div>
     </section>
 
-    {{ dump(article) }}
+    <!-- contenu principal  -->
+    <div class="blog-container">
+        <!-- en tête  -->
+        <div class="main-content">
+            <img src="/uploads/blog/{{ article.image }}" alt="">
+            <p class="blog-meta">
+                <i class="fa-regular fa-calendar-days"></i> Publié le <strong> {{ article.createdAt|date('d F Y') }}</strong>
+                &nbsp;|&nbsp; <i class="fa-solid fa-user"></i> <strong>Jean-Paul</strong>
+            </p>
+            <h1 class="blog-title">{{ article.title }}</h1>
+            <!-- Contenu -->
+            <div class="blog-content">
+                {{ article.description|nl2br }}
+            </div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="blog-sidebar">
+            <h3>Articles récents</h3>
+            <ul class="recent-posts">
+
+                <li>
+                    <a href="">
+                        Article 1
+                    </a>
+                    <span class="post-date">{{ article.createdAt|date('d/m/Y') }}</span>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 </main>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\ArticleRepository;
+use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,11 +18,12 @@ use Symfony\Component\Routing\Attribute\Route;
 final class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(ArticleRepository $articleRepository): Response
+    public function index(ArticleRepository $articleRepository,ProductRepository $productRepository): Response
     {
-        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
+          
         return $this->render('home/accueil.html.twig',[
-            'articles' => $articles,
+            'articles' => $articleRepository->findBy([], ['createdAt' => 'DESC']),
+            'products' => $productRepository->findByIshome(true)
         ]);
     }
 

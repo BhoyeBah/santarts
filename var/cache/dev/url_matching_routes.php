@@ -23,6 +23,7 @@ return [
         '/admin/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
         '/admin/produit' => [[['_route' => 'app_product_index', '_controller' => 'App\\Controller\\Admin\\ProductController::index'], null, ['GET' => 0], null, false, false, null]],
         '/admin/produit/new' => [[['_route' => 'app_product_new', '_controller' => 'App\\Controller\\Admin\\ProductController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/panier' => [[['_route' => 'app_cart', '_controller' => 'App\\Controller\\CartController::index'], null, null, null, false, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/a-propos' => [[['_route' => 'app_about', '_controller' => 'App\\Controller\\HomeController::about'], null, null, null, false, false, null]],
         '/produit' => [[['_route' => 'app_product', '_controller' => 'App\\Controller\\HomeController::product'], null, null, null, false, false, null]],
@@ -73,7 +74,11 @@ return [
                         .'|(*:410)'
                     .')'
                 .')'
-                .'|/Blog/article/([^/]++)(*:442)'
+                .'|/panier/(?'
+                    .'|add/([^/]++)(*:443)'
+                    .'|remove/([^/]++)(*:466)'
+                .')'
+                .'|/Blog/article/([^/]++)(*:497)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -97,7 +102,9 @@ return [
         389 => [[['_route' => 'app_product_show', '_controller' => 'App\\Controller\\Admin\\ProductController::show'], ['id'], ['GET' => 0], null, false, true, null]],
         402 => [[['_route' => 'app_product_edit', '_controller' => 'App\\Controller\\Admin\\ProductController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         410 => [[['_route' => 'app_product_delete', '_controller' => 'App\\Controller\\Admin\\ProductController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
-        442 => [
+        443 => [[['_route' => 'app_cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], null, null, false, true, null]],
+        466 => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], null, null, false, true, null]],
+        497 => [
             [['_route' => 'app_single_article', '_controller' => 'App\\Controller\\SingleArticleController::index'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -43,6 +43,9 @@ class Product
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $slug = null;
 
+    #[ORM\Column]
+    private ?bool $ishome = null;
+
     public function __construct()
     {
         $this->createdAt = new DateTimeImmutable();
@@ -144,6 +147,18 @@ class Product
     public function setSlug(?string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function ishome(): ?bool
+    {
+        return $this->ishome;
+    }
+
+    public function setIshome(bool $ishome): static
+    {
+        $this->ishome = $ishome;
 
         return $this;
     }
