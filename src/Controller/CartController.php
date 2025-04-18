@@ -16,6 +16,7 @@ final class CartController extends AbstractController
         return $this->render('home/cart.html.twig', [
             'panier' => $cartService->getFullCart(),
             'subtotal' => $cartService->getTotal(),
+            'fullQuantity' => $cartService->fullQuantity(),
         ]);
     }
 
@@ -24,15 +25,21 @@ final class CartController extends AbstractController
     {
 
         $cartService->add($id);
-        // dd($cartService->getPanier());
         return $this->redirectToRoute('app_cart');
-
     }
 
-    #[Route('/panier/remove/{id}', name: 'app_cart_remove')]
-    public function remove(int $id, CartService $cartService)
+    #[Route('/panier/decrease/{id}', name: 'app_cart_decrease')]
+    public function decrease(int $id, CartService $cartService)
     {
-        $cartService->remove($id);
+        $cartService->decrease($id);
+        return $this->redirectToRoute('app_cart');
+    }
+
+
+    #[Route('/panier/remove/', name: 'app_cart_remove')]
+    public function remove(CartService $cartService)
+    {
+        $cartService->remove();
         return $this->redirectToRoute('app_cart');
     }
 }

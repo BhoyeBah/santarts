@@ -24,6 +24,7 @@ return [
         '/admin/produit' => [[['_route' => 'app_product_index', '_controller' => 'App\\Controller\\Admin\\ProductController::index'], null, ['GET' => 0], null, false, false, null]],
         '/admin/produit/new' => [[['_route' => 'app_product_new', '_controller' => 'App\\Controller\\Admin\\ProductController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/panier' => [[['_route' => 'app_cart', '_controller' => 'App\\Controller\\CartController::index'], null, null, null, false, false, null]],
+        '/panier/remove' => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], null, null, null, true, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/a-propos' => [[['_route' => 'app_about', '_controller' => 'App\\Controller\\HomeController::about'], null, null, null, false, false, null]],
         '/produit' => [[['_route' => 'app_product', '_controller' => 'App\\Controller\\HomeController::product'], null, null, null, false, false, null]],
@@ -31,6 +32,7 @@ return [
         '/blog' => [[['_route' => 'app_blog', '_controller' => 'App\\Controller\\HomeController::blog'], null, ['POST' => 0, 'GET' => 1], null, false, false, null]],
         '/gallery' => [[['_route' => 'app_gallery', '_controller' => 'App\\Controller\\HomeController::gallery'], null, null, null, false, false, null]],
         '/contact' => [[['_route' => 'app_contact', '_controller' => 'App\\Controller\\HomeController::contact'], null, null, null, false, false, null]],
+        '/commande' => [[['_route' => 'app_order_create', '_controller' => 'App\\Controller\\OrderController::order'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -76,9 +78,9 @@ return [
                 .')'
                 .'|/panier/(?'
                     .'|add/([^/]++)(*:443)'
-                    .'|remove/([^/]++)(*:466)'
+                    .'|decrease/([^/]++)(*:468)'
                 .')'
-                .'|/Blog/article/([^/]++)(*:497)'
+                .'|/Blog/article/([^/]++)(*:499)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -103,8 +105,8 @@ return [
         402 => [[['_route' => 'app_product_edit', '_controller' => 'App\\Controller\\Admin\\ProductController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
         410 => [[['_route' => 'app_product_delete', '_controller' => 'App\\Controller\\Admin\\ProductController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
         443 => [[['_route' => 'app_cart_add', '_controller' => 'App\\Controller\\CartController::add'], ['id'], null, null, false, true, null]],
-        466 => [[['_route' => 'app_cart_remove', '_controller' => 'App\\Controller\\CartController::remove'], ['id'], null, null, false, true, null]],
-        497 => [
+        468 => [[['_route' => 'app_cart_decrease', '_controller' => 'App\\Controller\\CartController::decrease'], ['id'], null, null, false, true, null]],
+        499 => [
             [['_route' => 'app_single_article', '_controller' => 'App\\Controller\\SingleArticleController::index'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

@@ -1,0 +1,10 @@
+<h2>Bonjour {{ order.nom }} {{ order.prenom }},</h2>
+<p>Merci pour votre commande !</p>
+<p>Voici un résumé :</p>
+<ul>
+    {% for item in panier %}
+        <li>{{ item.product.name }} x {{ item.quantity }} = {{ item.product.price * item.quantity }} FCFA</li>
+    {% endfor %}
+</ul>
+<p><strong>Total :</strong> {{ total }} FCFA</p>
+<p>Nous vous contacterons rapidement pour la suite.</p>

@@ -24,46 +24,63 @@
 
     <section class="cart">
         <!-- Cart Header -->
+        {% if panier|length > 0 %}
         <div class="cart-header">
             <div class="cart-col">Produit</div>
             <div class="cart-col">Prix</div>
             <div class="cart-col">Quantité</div>
             <div class="cart-col">SubTotal</div>
         </div>
+        {% endif %}
 
         <!-- Item 1 -->
         {% for paniers in panier %}
         <div class="cart-item">
-            
+
             <div class="cart-col product-info">
                 <img src="/uploads/products/{{ paniers.product.image }}" alt="{{ paniers.product.name }}">
                 <span>{{ paniers.product.name }}</span>
             </div>
             <div class="cart-col">{{ paniers.product.price }} FCFA</div>
-            <!-- <div class="cart-col"><input type="number" value="1" min="1"></div> -->
-            <div class="cart-col">{{ paniers.quantity }}</div>
-            <div class="cart-col">{{ subtotal }}</div>
-        </div>
+            <div class="cart-col quantity-control">
+                <form action="{{ path('app_cart_decrease', {'id': paniers.product.id}) }}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-decrease">-</button>
+                </form>
 
+                <span class="quantity">{{ paniers.quantity }}</span>
+
+                <form action="{{ path('app_cart_add', {'id': paniers.product.id}) }}" method="post" style="display: inline;">
+                    <button type="submit" class="btn-increase">+</button>
+                </form>
+            </div>
+            <div class="cart-col">{{ paniers.subtotal }} FCFA</div>
+        </div>
+        {% else %}
+        <p>Votre panier est vide</p>
         {% endfor %}
 
+
+        {% if panier|length > 0 %}
         <!-- Actions -->
         <div class="actions">
             <div>
                 <input type="text" placeholder="Coupon Code">
                 <button>Apply Coupon</button>
             </div>
-            <button>Update Cart</button>
+            <form action="{{ path('app_cart_remove') }}">
+                <button type="submit">Vider le panier</button>
+            </form>
         </div>
 
         <!-- Cart Total -->
         <div class="cart-total">
-            <p><strong>Subtotal:</strong> <span>$1750</span></p>
-            <p><strong>Shipping:</strong> <span>Free</span></p>
-            <p><strong>Total:</strong> <span>$1750</span></p>
-            <button class="btn-checkout">Proceed to Checkout</button>
+            <p><strong>Quantité(s) :</strong> <span>{{ fullQuantity }}</span></p>
+            <p><strong>Total :</strong> <span>{{ subtotal }} FCFA</span></p>
+            <a href="{{ path('app_order_create') }}" class="btn-checkout">Validez la commande</a>
         </div>
     </section>
+    {% endif %}
+
 </div>
 
 {% endblock %}

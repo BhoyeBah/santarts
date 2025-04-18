@@ -1,0 +1,10 @@
+<h2>Nouvelle commande reçue</h2>
+<p><strong>Client :</strong> {{ order.nom }} {{ order.prenom }} ({{ order.email }})</p>
+<p><strong>Date :</strong> {{ order.createdAt|date('d/m/Y H:i') }}</p>
+<p><strong>Détails :</strong></p>
+<ul>
+    {% for item in panier %}
+        <li>{{ item.product.name }} x {{ item.quantity }} = {{ item.product.price * item.quantity }} FCFA</li>
+    {% endfor %}
+</ul>
+<p><strong>Total :</strong> {{ total }} FCFA</p>

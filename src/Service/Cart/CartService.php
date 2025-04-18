@@ -34,26 +34,36 @@ class CartService
         $this->session->set('panier', $panier);
     }
 
-    public function remove(int $id)
+    public function decrease(int $id)
     {
         $panier = $this->getPanier();
-
         if (!empty($panier[$id])) {
-            unset($panier[$id]);
+            $panier[$id]--;
+            // Si la quantité devient 0 ou moins, on retire complètement l'article
+            if ($panier[$id] <= 0) {
+                unset($panier[$id]);
+            }
         }
 
         $this->session->set('panier', $panier);
     }
+
 
     public function getFullCart(): array
     {
         $panier = $this->getPanier();
         $panierWithData = [];
 
+
         foreach ($panier as $id => $quantity) {
+            $product = $this->productRepository->find($id);
+            if (!$product) {
+                continue;
+            }
             $panierWithData[] = [
-                'product' => $this->productRepository->find($id),
-                'quantity' => $quantity
+                'product' => $product,
+                'quantity' => $quantity,
+                'subtotal' => $product->getPrice() * $quantity,
             ];
         }
 
@@ -71,19 +81,24 @@ class CartService
         return $total;
     }
 
-
     public function fullQuantity()
     {
         $panier = $this->getFullCart();
 
         $totalQuantity = 0;
-    
+
         foreach ($panier as $item) {
             if (isset($item['quantity'])) {
                 $totalQuantity += $item['quantity'];
             }
         }
-    
+
         return $totalQuantity;
+    }
+
+
+    public function remove()
+    {
+        $this->session->remove('panier');
     }
 }
