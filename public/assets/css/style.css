@@ -454,11 +454,7 @@ section {
     color: var(--secondary);
 }
 
-
-/*********css about end*************************************/
-
-
-/* css product start  */
+/* css product start */
 .product .container {
     display: flex;
     flex-wrap: wrap;
@@ -506,7 +502,6 @@ section {
     transform: scale(1.05);
 }
 
-
 .product .container .box-product .image h3 a {
     color: var(--secondary);
     font-size: 1.2rem;
@@ -521,20 +516,24 @@ section {
 }
 
 .product .container .box-product .btn-buy {
-    font-size: 1.5rem;
-    padding: 1rem;
-    text-align: center;
-    transition: background-color 0.4s ease-in-out;
+    display: inline-block;
+    font-size: 1.2rem;
+    padding: 0.75rem 1.5rem;
+    margin: 1rem 0;
+    background-color: var(--secondary);
+    color: var(--white);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
     cursor: pointer;
 }
 
 .product .container .box-product .btn-buy:hover {
     background-color: var(--primary);
-    transition: 0.4s ease;
     color: var(--white);
 }
+/* css product end */
 
-/* css product end   */
 
 /* css blog start   */
 
@@ -1128,13 +1127,13 @@ input[type="number"] {
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
-    color: #222;
+    /*color: #222;*/
 }
 
 h2 {
     font-size: 18px;
     margin: 25px 0 15px;
-    color: #444;
+    /*color: #444;*/
 }
 
 .form-group {

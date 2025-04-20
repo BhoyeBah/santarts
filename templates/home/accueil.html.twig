@@ -102,19 +102,20 @@
 
         <div class="container">
             {% for product in products %}
-            <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_2s">
-                <div class="image">
-                    <img src="/uploads/products/{{ product.image }}" alt="{{ product.name }}" width="150px">
-                    <h3>
-                        <a href="{{ path('app_cart_add', {'id': product.id }) }}">{{ product.name }}</a>
-                    </h3>
+                <div class="box-product wow animate__animated animate__fadeInUp animate__delay-0_2s">
+                    <div class="image">
+                        <img src="/uploads/products/{{ product.image }}" alt="{{ product.name }}" width="150px">
+                        <h3>
+                            <a href="{{ path('app_cart_add', {'id': product.id }) }}">{{ product.name }}</a>
+                        </h3>
+                    </div>
+                    <p class="price">Prix : <span>{{ product.price }} CFA</span></p>
+                    <a href="{{ path('app_cart_add', {'id': product.id }) }}" class="btn-buy">Acheter</a>
                 </div>
-                <p class="price">Prix : <span>{{ product.price }} CFA</span></p>
-                <div class="btn-buy">Acheter</div>
-            </div>
             {% endfor %}
         </div>
     </section>
+
 
 
     <section class="blog" id="blog">
@@ -188,9 +189,21 @@
         <div class="container">
             <div class="our-team wow animate__animated animate__fadeInUp animate__delay-1s">
                 <div class="pic">
-                    <img src="assets/images/team/team-2.jpg" alt="team">
+                    <img src="{{ asset('assets/images/team/avatar-homme.avif') }}" alt="team">
                 </div>
-                <h3 class="title">Bah Mamadou Bhoye</h3>
+                <h3 class="title">Prénom & Nom</h3>
+                <span class="post">Directeur</span>
+                <ul class="social">
+                    <li><a href="#" class="fa-brands fa-linkedin"></a></li>
+                    <li><a href="#" class="fa-brands fa-facebook"></a></li>
+                    <li><a href="#" class="fa-brands fa-square-instagram"></a></li>
+                </ul>
+            </div>
+            <div class="our-team wow animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="pic">
+                    <img src="{{ asset('assets/images/team/avatar-homme.avif') }}" alt="team">
+                </div>
+                <h3 class="title">Prénom & Nom</h3>
                 <span class="post">CEO</span>
                 <ul class="social">
                     <li><a href="#" class="fa-brands fa-linkedin"></a></li>
@@ -200,10 +213,10 @@
             </div>
             <div class="our-team wow animate__animated animate__fadeInUp animate__delay-1s">
                 <div class="pic">
-                    <img src="assets/images/team/team-2.jpg" alt="team">
+                    <img src="{{ asset('assets/images/team/avatar-homme.avif') }}" alt="team">
                 </div>
-                <h3 class="title">Bah Mamadou Bhoye</h3>
-                <span class="post">CEO</span>
+                <h3 class="title">Prénom & Nom</h3>
+                <span class="post">Sécrétaire</span>
                 <ul class="social">
                     <li><a href="#" class="fa-brands fa-linkedin"></a></li>
                     <li><a href="#" class="fa-brands fa-facebook"></a></li>
@@ -212,21 +225,9 @@
             </div>
             <div class="our-team wow animate__animated animate__fadeInUp animate__delay-1s">
                 <div class="pic">
-                    <img src="assets/images/team/team-2.jpg" alt="team">
+                    <img src="{{ asset('assets/images/team/avatar-homme.avif') }}" alt="team">
                 </div>
-                <h3 class="title">Bah Mamadou Bhoye</h3>
-                <span class="post">CEO</span>
-                <ul class="social">
-                    <li><a href="#" class="fa-brands fa-linkedin"></a></li>
-                    <li><a href="#" class="fa-brands fa-facebook"></a></li>
-                    <li><a href="#" class="fa-brands fa-square-instagram"></a></li>
-                </ul>
-            </div>
-            <div class="our-team wow animate__animated animate__fadeInUp animate__delay-1s">
-                <div class="pic">
-                    <img src="assets/images/team/team-2.jpg" alt="team">
-                </div>
-                <h3 class="title">Bah Mamadou Bhoye</h3>
+                <h3 class="title">Prénom & Nom</h3>
                 <span class="post">CEO</span>
                 <ul class="social">
                     <li><a href="#" class="fa-brands fa-linkedin"></a></li>

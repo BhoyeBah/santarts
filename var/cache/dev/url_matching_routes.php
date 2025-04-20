@@ -21,6 +21,7 @@ return [
         '/admin/catégorie' => [[['_route' => 'app_category_index', '_controller' => 'App\\Controller\\Admin\\CategoryController::index'], null, ['GET' => 0], null, false, false, null]],
         '/admin/catégorie/new' => [[['_route' => 'app_category_new', '_controller' => 'App\\Controller\\Admin\\CategoryController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/admin/dashboard' => [[['_route' => 'app_dashboard', '_controller' => 'App\\Controller\\Admin\\DashboardController::index'], null, null, null, false, false, null]],
+        '/admin/commande' => [[['_route' => 'app_order_index', '_controller' => 'App\\Controller\\Admin\\OrderController::index'], null, null, null, false, false, null]],
         '/admin/produit' => [[['_route' => 'app_product_index', '_controller' => 'App\\Controller\\Admin\\ProductController::index'], null, ['GET' => 0], null, false, false, null]],
         '/admin/produit/new' => [[['_route' => 'app_product_new', '_controller' => 'App\\Controller\\Admin\\ProductController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
         '/panier' => [[['_route' => 'app_cart', '_controller' => 'App\\Controller\\CartController::index'], null, null, null, false, false, null]],

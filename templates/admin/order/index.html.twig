@@ -1,0 +1,65 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des commandes{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="page-inner">
+            <div class="page-header">
+                <h3 class="fw-bold mb-3">Listes des articles</h3>
+                <ul class="breadcrumbs mb-3">
+                    <li class="nav-home">
+                        <a href="{{ path('app_dashboard') }}">
+                            <i class="icon-home"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title">Liste de tous les commandes</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="basic-datatables" class="display table table-striped table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>Numéro</th>
+                                        <th>Date de commande</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for order in orders %}
+                                        <tr>
+                                            <td>{{ order.numero }}</td>
+                                            <td>{{ order.createdAt|date('d/m/Y') }}</td>
+                                            <td>
+                                               <span class="badge bg-{{ order.status == true ? 'success' : 'warning' }}">
+                                                 {{ order.status == true ? 'Paid' : 'Pending' }}
+                                               </span>
+                                            </td>
+                                            <td>{{ order.total }} FCFA</td>
+                                            <td>
+                                                <button class="btn btn-success">Details</button>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                        <tr>
+                                            <td colspan="6">Aucune commande trouvé</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
