@@ -141,10 +141,10 @@
                         {{ article.description|u.truncate(100,'...', false) }}
                     </p>
                     <div class="user">
-                        <img src="assets/images/blog/blog-author-2.jpg" alt="image utilisateur">
+                        <img src="{{ asset('assets/images/team/avatar-homme.avif') }}" alt="image utilisateur">
                         <div class="user-info">
-                            <h5>Bah Mamadou</h5>
-                            <small>4h ago</small>
+                            <h5>Autheur</h5>
+                            <small>{{ article.createdAt|date('d/m/Y h:m') }}</small>
                         </div>
                     </div>
                 </div>
