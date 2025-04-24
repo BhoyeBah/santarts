@@ -1512,3 +1512,8 @@ a8dde9,::1,GET,http://localhost:8000/assets/images/page-heaer-contact.jpg,174515
 6b79aa,::1,GET,http://localhost:8000/contact,1745153966,,200,request
 0d6d00,::1,GET,http://localhost:8000/sw.js,1745153967,8fd883,404,request
 8fd883,::1,GET,http://localhost:8000/sw.js,1745153968,,404,request
+adcc6a,::1,GET,http://localhost:8000/sw.js,1745154552,0fbda5,404,request
+0fbda5,::1,GET,http://localhost:8000/sw.js,1745154552,,404,request
+9f8146,::1,GET,http://localhost:8000/,1745188244,,200,request
+802ea7,::1,GET,http://localhost:8000/sw.js,1745188251,032f79,404,request
+032f79,::1,GET,http://localhost:8000/sw.js,1745188251,,404,request
