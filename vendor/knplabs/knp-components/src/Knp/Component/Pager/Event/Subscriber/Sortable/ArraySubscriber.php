@@ -2,7 +2,6 @@
 
 namespace Knp\Component\Pager\Event\Subscriber\Sortable;
 
-use Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface;
 use Knp\Component\Pager\Event\ItemsEvent;
 use Knp\Component\Pager\Exception\InvalidValueException;
 use Knp\Component\Pager\PaginatorInterface;
@@ -25,7 +24,7 @@ class ArraySubscriber implements EventSubscriberInterface
 
     private readonly ?PropertyAccessorInterface $propertyAccessor;
 
-    public function __construct(private readonly ArgumentAccessInterface $argumentAccess, ?PropertyAccessorInterface $accessor = null)
+    public function __construct(?PropertyAccessorInterface $accessor = null)
     {
         if (!$accessor && class_exists(PropertyAccess::class)) {
             $accessor = PropertyAccess::createPropertyAccessorBuilder()->enableMagicCall()->getPropertyAccessor();
@@ -36,24 +35,26 @@ class ArraySubscriber implements EventSubscriberInterface
 
     public function items(ItemsEvent $event): void
     {
+        $argumentAccess = $event->getArgumentAccess();
+
         // Check if the result has already been sorted by another sort subscriber
         $customPaginationParameters = $event->getCustomPaginationParameters();
         if (!empty($customPaginationParameters['sorted']) ) {
             return;
         }
         $sortField = $event->options[PaginatorInterface::SORT_FIELD_PARAMETER_NAME];
-        if (!is_array($event->target) || null === $sortField || !$this->argumentAccess->has($sortField)) {
+        if (!is_array($event->target) || null === $sortField || !$argumentAccess->has($sortField)) {
             return;
         }
 
         $event->setCustomPaginationParameter('sorted', true);
 
-        if (isset($event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST]) && !in_array($this->argumentAccess->get($sortField), $event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST])) {
-            throw new InvalidValueException("Cannot sort by: [{$this->argumentAccess->get($sortField)}] this field is not in allow list.");
+        if (isset($event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST]) && !in_array($argumentAccess->get($sortField), $event->options[PaginatorInterface::SORT_FIELD_ALLOW_LIST])) {
+            throw new InvalidValueException("Cannot sort by: [{$argumentAccess->get($sortField)}] this field is not in allow list.");
         }
 
         $sortFunction = $event->options['sortFunction'] ?? [$this, 'proxySortFunction'];
-        $sortField = $this->argumentAccess->get($sortField);
+        $sortField = $argumentAccess->get($sortField);
 
         // compatibility layer
         if ($sortField[0] === '.') {
@@ -63,19 +64,19 @@ class ArraySubscriber implements EventSubscriberInterface
         call_user_func_array($sortFunction, [
             &$event->target,
             $sortField,
-            $this->getSortDirection($event->options),
+            $this->getSortDirection($event),
         ]);
     }
 
-    /**
-     * @param array<string, mixed> $options
-     */
-    private function getSortDirection(array $options): string
+    private function getSortDirection(ItemsEvent $event): string
     {
-        if (!$this->argumentAccess->has($options[PaginatorInterface::SORT_DIRECTION_PARAMETER_NAME])) {
+        $argumentAccess = $event->getArgumentAccess();
+        $options = $event->options;
+
+        if (!$argumentAccess->has($options[PaginatorInterface::SORT_DIRECTION_PARAMETER_NAME])) {
             return 'desc';
         }
-        $direction = $this->argumentAccess->get($options[PaginatorInterface::SORT_DIRECTION_PARAMETER_NAME]);
+        $direction = $argumentAccess->get($options[PaginatorInterface::SORT_DIRECTION_PARAMETER_NAME]);
         if (strtolower($direction) === 'asc') {
             return 'asc';
         }
