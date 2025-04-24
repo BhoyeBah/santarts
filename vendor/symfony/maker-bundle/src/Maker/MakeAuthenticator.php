@@ -92,8 +92,7 @@ final class MakeAuthenticator extends AbstractMaker
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
         $command
-            ->setHelp($this->getHelpFileContents('MakeAuth.txt'))
-        ;
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeAuth.txt'));
     }
 
     public function interact(InputInterface $input, ConsoleStyle $io, Command $command): void

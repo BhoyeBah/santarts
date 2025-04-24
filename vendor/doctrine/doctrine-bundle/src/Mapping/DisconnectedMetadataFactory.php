@@ -21,9 +21,11 @@ use function strpos;
  */
 class DisconnectedMetadataFactory
 {
-    public function __construct(
-        private readonly ManagerRegistry $registry,
-    ) {
+    private ManagerRegistry $registry;
+
+    public function __construct(ManagerRegistry $registry)
+    {
+        $this->registry = $registry;
     }
 
     /**
@@ -144,7 +146,6 @@ class DisconnectedMetadataFactory
     private function getMetadataForClass(string $entity): ClassMetadataCollection
     {
         foreach ($this->registry->getManagers() as $em) {
-            /* @phpstan-ignore class.notFound */
             $cmf = new DisconnectedClassMetadataFactory();
             $cmf->setEntityManager($em);
 
@@ -161,7 +162,6 @@ class DisconnectedMetadataFactory
     {
         $metadata = [];
         foreach ($this->registry->getManagers() as $em) {
-            /* @phpstan-ignore class.notFound */
             $cmf = new DisconnectedClassMetadataFactory();
             $cmf->setEntityManager($em);
             foreach ($cmf->getAllMetadata() as $m) {

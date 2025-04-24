@@ -82,8 +82,7 @@ final class MakeTest extends AbstractMaker implements InputAwareMakerInterface
         $command
             ->addArgument('type', InputArgument::OPTIONAL, 'The type of test: '.implode(', ', $typesDesc))
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the test class (e.g. <fg=yellow>BlogPostTest</>)')
-            ->setHelp($this->getHelpFileContents('MakeTest.txt').implode("\n", $typesHelp))
-        ;
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeTest.txt').implode("\n", $typesHelp));
 
         $inputConfig->setArgumentAsNonInteractive('name');
         $inputConfig->setArgumentAsNonInteractive('type');

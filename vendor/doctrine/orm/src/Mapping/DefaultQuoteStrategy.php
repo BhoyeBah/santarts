@@ -24,7 +24,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
     public function getColumnName(string $fieldName, ClassMetadata $class, AbstractPlatform $platform): string
     {
         return isset($class->fieldMappings[$fieldName]->quoted)
-            ? $platform->quoteSingleIdentifier($class->fieldMappings[$fieldName]->columnName)
+            ? $platform->quoteIdentifier($class->fieldMappings[$fieldName]->columnName)
             : $class->fieldMappings[$fieldName]->columnName;
     }
 
@@ -42,7 +42,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
         }
 
         return isset($class->table['quoted'])
-            ? $platform->quoteSingleIdentifier($tableName)
+            ? $platform->quoteIdentifier($tableName)
             : $tableName;
     }
 
@@ -52,14 +52,14 @@ class DefaultQuoteStrategy implements QuoteStrategy
     public function getSequenceName(array $definition, ClassMetadata $class, AbstractPlatform $platform): string
     {
         return isset($definition['quoted'])
-            ? $platform->quoteSingleIdentifier($definition['sequenceName'])
+            ? $platform->quoteIdentifier($definition['sequenceName'])
             : $definition['sequenceName'];
     }
 
     public function getJoinColumnName(JoinColumnMapping $joinColumn, ClassMetadata $class, AbstractPlatform $platform): string
     {
         return isset($joinColumn->quoted)
-            ? $platform->quoteSingleIdentifier($joinColumn->name)
+            ? $platform->quoteIdentifier($joinColumn->name)
             : $joinColumn->name;
     }
 
@@ -69,7 +69,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
         AbstractPlatform $platform,
     ): string {
         return isset($joinColumn->quoted)
-            ? $platform->quoteSingleIdentifier($joinColumn->referencedColumnName)
+            ? $platform->quoteIdentifier($joinColumn->referencedColumnName)
             : $joinColumn->referencedColumnName;
     }
 
@@ -87,7 +87,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
         $tableName = $association->joinTable->name;
 
         if (isset($association->joinTable->quoted)) {
-            $tableName = $platform->quoteSingleIdentifier($tableName);
+            $tableName = $platform->quoteIdentifier($tableName);
         }
 
         return $schema . $tableName;
@@ -113,7 +113,7 @@ class DefaultQuoteStrategy implements QuoteStrategy
             $joinColumns            = $assoc->joinColumns;
             $assocQuotedColumnNames = array_map(
                 static fn (JoinColumnMapping $joinColumn) => isset($joinColumn->quoted)
-                    ? $platform->quoteSingleIdentifier($joinColumn->name)
+                    ? $platform->quoteIdentifier($joinColumn->name)
                     : $joinColumn->name,
                 $joinColumns,
             );

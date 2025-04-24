@@ -17,7 +17,6 @@ use Predis\Connection\Aggregate\RedisCluster;
 use Predis\Connection\Aggregate\ReplicationInterface;
 use Predis\Connection\Cluster\ClusterInterface as Predis2ClusterInterface;
 use Predis\Connection\Cluster\RedisCluster as Predis2RedisCluster;
-use Predis\Connection\Replication\ReplicationInterface as Predis2ReplicationInterface;
 use Predis\Response\ErrorInterface;
 use Predis\Response\Status;
 use Relay\Relay;
@@ -474,16 +473,9 @@ trait RedisTrait
         $cleared = true;
         $hosts = $this->getHosts();
         $host = reset($hosts);
-        if ($host instanceof \Predis\Client) {
-            $connection = $host->getConnection();
-
-            if ($connection instanceof ReplicationInterface) {
-                $hosts = [$host->getClientFor('master')];
-            } elseif ($connection instanceof Predis2ReplicationInterface) {
-                $connection->switchToMaster();
-
-                $hosts = [$host];
-            }
+        if ($host instanceof \Predis\Client && $host->getConnection() instanceof ReplicationInterface) {
+            // Predis supports info command only on the master in replication environments
+            $hosts = [$host->getClientFor('master')];
         }
 
         foreach ($hosts as $host) {

@@ -53,7 +53,7 @@ final class MakeForm extends AbstractMaker
         $command
             ->addArgument('name', InputArgument::OPTIONAL, \sprintf('The name of the form class (e.g. <fg=yellow>%sType</>)', Str::asClassName(Str::getRandomTerm())))
             ->addArgument('bound-class', InputArgument::OPTIONAL, 'The name of Entity or fully qualified model class name that the new form will be bound to (empty for none)')
-            ->setHelp($this->getHelpFileContents('MakeForm.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeForm.txt'))
         ;
 
         $inputConfig->setArgumentAsNonInteractive('bound-class');

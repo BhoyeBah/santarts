@@ -17,7 +17,6 @@ use function array_search;
 use function assert;
 use function count;
 use function in_array;
-use function is_array;
 use function key;
 use function reset;
 use function sprintf;
@@ -139,21 +138,14 @@ class SimpleObjectHydrator extends AbstractHydrator
             }
 
             if ($value !== null && isset($cacheKeyInfo['enumType'])) {
-                $originalValue = $currentValue = $value;
+                $originalValue = $value;
                 try {
-                    if (! is_array($originalValue)) {
-                        $value = $this->buildEnum($originalValue, $cacheKeyInfo['enumType']);
-                    } else {
-                        $value = [];
-                        foreach ($originalValue as $i => $currentValue) {
-                            $value[$i] = $this->buildEnum($currentValue, $cacheKeyInfo['enumType']);
-                        }
-                    }
+                    $value = $this->buildEnum($originalValue, $cacheKeyInfo['enumType']);
                 } catch (ValueError $e) {
                     throw MappingException::invalidEnumValue(
                         $entityName,
                         $cacheKeyInfo['fieldName'],
-                        (string) $currentValue,
+                        (string) $originalValue,
                         $cacheKeyInfo['enumType'],
                         $e,
                     );

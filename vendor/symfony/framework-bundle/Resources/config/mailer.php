@@ -46,7 +46,10 @@ return static function (ContainerConfigurator $container) {
             ])
 
         ->set('mailer.default_transport', TransportInterface::class)
-        ->alias('mailer.default_transport', 'mailer.transports')
+            ->factory([service('mailer.transport_factory'), 'fromString'])
+            ->args([
+                abstract_arg('env(MAILER_DSN)'),
+            ])
         ->alias(TransportInterface::class, 'mailer.default_transport')
 
         ->set('mailer.messenger.message_handler', MessageHandler::class)

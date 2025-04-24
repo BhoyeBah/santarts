@@ -25,33 +25,18 @@ class StimulusLazyControllerHandler {
         this.lazyLoadNewControllers(document.documentElement);
     }
     lazyLoadExistingControllers(element) {
-        Array.from(element.querySelectorAll(`[${controllerAttribute}]`))
-            .flatMap(extractControllerNamesFrom)
-            .forEach((controllerName) => this.loadLazyController(controllerName));
+        this.queryControllerNamesWithin(element).forEach((controllerName) => this.loadLazyController(controllerName));
     }
-    loadLazyController(name) {
-        if (!this.lazyControllers[name]) {
-            return;
-        }
-        const controllerLoader = this.lazyControllers[name];
-        delete this.lazyControllers[name];
-        if (!canRegisterController(name, this.application)) {
-            return;
-        }
-        this.application.logDebugActivity(name, 'lazy:loading');
-        controllerLoader()
-            .then((controllerModule) => {
-            this.application.logDebugActivity(name, 'lazy:loaded');
+    async loadLazyController(name) {
+        if (canRegisterController(name, this.application)) {
+            if (this.lazyControllers[name] === undefined) {
+                return;
+            }
+            const controllerModule = await this.lazyControllers[name]();
             registerController(name, controllerModule.default, this.application);
-        })
-            .catch((error) => {
-            console.error(`Error loading controller "${name}":`, error);
-        });
+        }
     }
     lazyLoadNewControllers(element) {
-        if (Object.keys(this.lazyControllers).length === 0) {
-            return;
-        }
         new MutationObserver((mutationsList) => {
             for (const { attributeName, target, type } of mutationsList) {
                 switch (type) {
@@ -72,6 +57,9 @@ class StimulusLazyControllerHandler {
             subtree: true,
             childList: true,
         });
+    }
+    queryControllerNamesWithin(element) {
+        return Array.from(element.querySelectorAll(`[${controllerAttribute}]`)).flatMap(extractControllerNamesFrom);
     }
 }
 function registerController(name, controller, application) {

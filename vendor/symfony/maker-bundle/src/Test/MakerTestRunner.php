@@ -35,16 +35,7 @@ class MakerTestRunner
     {
         $this->executedMakerProcess = $this->environment->runMaker($inputs, $argumentsString, $allowedToFail, $envVars);
 
-        $output = $this->executedMakerProcess->getOutput();
-
-        // Allows for debugging the actual CLI output from within a test process. E.g. Manually viewing the output of the
-        // `make:voter` command that was run within the MakeVoterTest from your local command line.
-        // You should never use this in CI unless you know what you're doing - resource intensive.
-        if ('true' === getenv('MAKER_TEST_DUMP_OUTPUT')) {
-            dump(['Maker Process Output' => $output, 'Maker Process Error Output' => $this->executedMakerProcess->getErrorOutput()]);
-        }
-
-        return $output;
+        return $this->executedMakerProcess->getOutput();
     }
 
     /**
@@ -207,7 +198,7 @@ class MakerTestRunner
     public function runTests(): void
     {
         $internalTestProcess = MakerTestProcess::create(
-            \sprintf('php %s', $this->getPath('bin/phpunit')),
+            \sprintf('php %s', $this->getPath('/bin/phpunit')),
             $this->environment->getPath())
             ->run(true)
         ;

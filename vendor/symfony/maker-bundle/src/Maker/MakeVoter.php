@@ -43,7 +43,7 @@ final class MakeVoter extends AbstractMaker
     {
         $command
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the security voter class (e.g. <fg=yellow>BlogPostVoter</>)')
-            ->setHelp($this->getHelpFileContents('MakeVoter.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeVoter.txt'))
         ;
     }
 
@@ -60,9 +60,10 @@ final class MakeVoter extends AbstractMaker
             ]
         );
 
-        $generator->generateClassFromClassData(
-            $voterClassData,
+        $generator->generateClass(
+            $voterClassData->getFullClassName(),
             'security/Voter.tpl.php',
+            ['class_data' => $voterClassData]
         );
 
         $generator->writeChanges();

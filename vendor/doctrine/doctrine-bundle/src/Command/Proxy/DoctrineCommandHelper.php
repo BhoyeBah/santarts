@@ -28,14 +28,13 @@ abstract class DoctrineCommandHelper
         $em = $application->getKernel()->getContainer()->get('doctrine')->getManager($emName);
         assert($em instanceof EntityManagerInterface);
         $helperSet = $application->getHelperSet();
-        /* @phpstan-ignore class.notFound, argument.type (ORM < 3 specific) */
+        /** @psalm-suppress InvalidArgument ORM < 3 specific */
         $helperSet->set(new EntityManagerHelper($em), 'em');
 
         trigger_deprecation(
             'doctrine/doctrine-bundle',
             '2.7',
             'Providing an EntityManager using "%s" is deprecated. Use an instance of "%s" instead.',
-            /* @phpstan-ignore class.notFound */
             EntityManagerHelper::class,
             EntityManagerProvider::class,
         );

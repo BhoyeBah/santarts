@@ -108,7 +108,7 @@ final class MakeRegistrationForm extends AbstractMaker
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
         $command
-            ->setHelp($this->getHelpFileContents('MakeRegistrationForm.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeRegistrationForm.txt'))
         ;
 
         $this->configureCommandWithTestsOption($command);

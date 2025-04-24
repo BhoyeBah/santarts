@@ -12,6 +12,7 @@
 namespace Symfony\Component\HttpClient\Response;
 
 use Symfony\Component\HttpClient\Chunk\ErrorChunk;
+use Symfony\Component\HttpClient\Chunk\FirstChunk;
 use Symfony\Component\HttpClient\Chunk\LastChunk;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Contracts\HttpClient\ChunkInterface;
@@ -244,7 +245,7 @@ class AsyncResponse implements ResponseInterface, StreamableInterface
                 $wrappedResponses[] = $r->response;
 
                 if ($r->stream) {
-                    yield from self::passthruStream($response = $r->response, $r, $asyncMap, new LastChunk());
+                    yield from self::passthruStream($response = $r->response, $r, new FirstChunk(), $asyncMap);
 
                     if (!isset($asyncMap[$response])) {
                         array_pop($wrappedResponses);
@@ -275,9 +276,15 @@ class AsyncResponse implements ResponseInterface, StreamableInterface
                 }
 
                 if (!$r->passthru) {
-                    $r->stream = (static fn () => yield $chunk)();
-                    yield from self::passthruStream($response, $r, $asyncMap);
+                    if (null !== $chunk->getError() || $chunk->isLast()) {
+                        unset($asyncMap[$response]);
+                    } elseif (null !== $r->content && '' !== ($content = $chunk->getContent()) && \strlen($content) !== fwrite($r->content, $content)) {
+                        $chunk = new ErrorChunk($r->offset, new TransportException(sprintf('Failed writing %d bytes to the response buffer.', \strlen($content))));
+                        $r->info['error'] = $chunk->getError();
+                        $r->response->cancel();
+                    }
 
+                    yield $r => $chunk;
                     continue;
                 }
 
@@ -340,13 +347,13 @@ class AsyncResponse implements ResponseInterface, StreamableInterface
         }
         $r->stream = $stream;
 
-        yield from self::passthruStream($response, $r, $asyncMap);
+        yield from self::passthruStream($response, $r, null, $asyncMap);
     }
 
     /**
      * @param \SplObjectStorage<ResponseInterface, AsyncResponse>|null $asyncMap
      */
-    private static function passthruStream(ResponseInterface $response, self $r, ?\SplObjectStorage $asyncMap, ?ChunkInterface $chunk = null): \Generator
+    private static function passthruStream(ResponseInterface $response, self $r, ?ChunkInterface $chunk, ?\SplObjectStorage $asyncMap): \Generator
     {
         while (true) {
             try {

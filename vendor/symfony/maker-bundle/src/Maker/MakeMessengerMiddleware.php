@@ -45,8 +45,7 @@ final class MakeMessengerMiddleware extends AbstractMaker
     {
         $command
             ->addArgument('name', InputArgument::OPTIONAL, 'The name of the middleware class (e.g. <fg=yellow>CustomMiddleware</>)')
-            ->setHelp($this->getHelpFileContents('MakeMessage.txt'))
-        ;
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeMessage.txt'));
     }
 
     public function generate(InputInterface $input, ConsoleStyle $io, Generator $generator): void

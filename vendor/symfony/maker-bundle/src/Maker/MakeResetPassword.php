@@ -119,7 +119,7 @@ class MakeResetPassword extends AbstractMaker
     public function configureCommand(Command $command, InputConfiguration $inputConfig): void
     {
         $command
-            ->setHelp($this->getHelpFileContents('MakeResetPassword.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeResetPassword.txt'))
         ;
 
         $this->addWithUuidOption($command);

@@ -44,7 +44,7 @@ final class MakeFixtures extends AbstractMaker
     {
         $command
             ->addArgument('fixtures-class', InputArgument::OPTIONAL, 'The class name of the fixtures to create (e.g. <fg=yellow>AppFixtures</>)')
-            ->setHelp($this->getHelpFileContents('MakeFixture.txt'))
+            ->setHelp(file_get_contents(__DIR__.'/../Resources/help/MakeFixture.txt'))
         ;
     }
 

@@ -29,14 +29,11 @@ class CollectionCacheKey extends CacheKey
         public readonly string $entityClass,
         public readonly string $association,
         array $ownerIdentifier,
-        string $filterHash = '',
     ) {
         ksort($ownerIdentifier);
 
         $this->ownerIdentifier = $ownerIdentifier;
 
-        $filterHash = $filterHash === '' ? '' : '_' . $filterHash;
-
-        parent::__construct(str_replace('\\', '.', strtolower($entityClass)) . '_' . implode(' ', $ownerIdentifier) . '__' . $association . $filterHash);
+        parent::__construct(str_replace('\\', '.', strtolower($entityClass)) . '_' . implode(' ', $ownerIdentifier) . '__' . $association);
     }
 }
