@@ -11,10 +11,10 @@
             <nav class="breadcrumb">
                 <ul>
                     <li class="breadcrumb-item">
-                        <a href="index.html">Accueil</a>
+                        <a href="/">Accueil</a>
                     </li>
                     <li class="breadcrumb-item active">
-                        <a href="index.html">About</a>
+                        <a href="{{ path('app_about') }}">About</a>
                     </li>
                     <!-- <li class="breadcrumb-item">
                             Détails du Magasin
@@ -42,15 +42,16 @@
 
         <!-- SIDEBAR -->
         <div class="blog-sidebar">
+            {% if article.id != article.id %}
             <h3>Articles récents</h3>
             <ul class="recent-posts">
-
                 <li>
-                    <a href="">
-                        Article 1
+                    <a href="{{ path('app_single_article', {'id': article.id}) }}">
+                        {{ article.title }}
                     </a>
                     <span class="post-date">{{ article.createdAt|date('d/m/Y') }}</span>
                 </li>
+                {% endif %}
             </ul>
         </div>
 
