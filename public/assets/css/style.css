@@ -295,6 +295,9 @@ section {
 .page-header.page-header-blog{
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
 }
+.page-header.page-header-blog-detail{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
+}
 .page-header.page-header-cart{
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
 }
@@ -1745,5 +1748,9 @@ hr {
     .team .container .our-team {
         flex: 1 1 100%;
         max-width: 100%;
+    }
+
+    .blog-container{
+        display: block;
     }
 }
