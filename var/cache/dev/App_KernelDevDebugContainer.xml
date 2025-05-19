@@ -273,7 +273,40 @@
     <parameter key="knp_paginator.page_name">page</parameter>
     <parameter key="knp_paginator.remove_first_page_param">false</parameter>
     <parameter key="vich_uploader.default_filename_attribute_suffix">_name</parameter>
-    <parameter key="vich_uploader.mappings" type="collection"/>
+    <parameter key="vich_uploader.mappings" type="collection">
+      <parameter key="products" type="collection">
+        <parameter key="uri_prefix">/uploads/products</parameter>
+        <parameter key="upload_destination">C:\xampp\htdocs\santarts/public/uploads/products</parameter>
+        <parameter key="namer" type="collection">
+          <parameter key="service">Vich\UploaderBundle\Naming\SmartUniqueNamer.products</parameter>
+          <parameter key="options" type="collection"/>
+        </parameter>
+        <parameter key="directory_namer" type="collection">
+          <parameter key="service">null</parameter>
+          <parameter key="options">null</parameter>
+        </parameter>
+        <parameter key="delete_on_remove">true</parameter>
+        <parameter key="delete_on_update">true</parameter>
+        <parameter key="inject_on_load">false</parameter>
+        <parameter key="db_driver">orm</parameter>
+      </parameter>
+      <parameter key="blog" type="collection">
+        <parameter key="uri_prefix">/uploads/blog</parameter>
+        <parameter key="upload_destination">C:\xampp\htdocs\santarts/public/uploads/blog</parameter>
+        <parameter key="namer" type="collection">
+          <parameter key="service">Vich\UploaderBundle\Naming\SmartUniqueNamer.blog</parameter>
+          <parameter key="options" type="collection"/>
+        </parameter>
+        <parameter key="directory_namer" type="collection">
+          <parameter key="service">null</parameter>
+          <parameter key="options">null</parameter>
+        </parameter>
+        <parameter key="delete_on_remove">true</parameter>
+        <parameter key="delete_on_update">true</parameter>
+        <parameter key="inject_on_load">false</parameter>
+        <parameter key="db_driver">orm</parameter>
+      </parameter>
+    </parameter>
     <parameter key="vich_uploader.use_flysystem_to_resolve_uri">false</parameter>
     <parameter key="vich_uploader.file_injector.class">Vich\UploaderBundle\Injector\FileInjector</parameter>
     <parameter key="data_collector.templates" type="collection">
@@ -539,7 +572,7 @@
     </service>
     <service id="argument_resolver.service" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
       <tag priority="-50" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">controller.argument_value_resolver</tag>
-      <argument type="service" id=".service_locator.O7GileC"/>
+      <argument type="service" id=".service_locator.0iFFrHK"/>
     </service>
     <service id="argument_resolver.default" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">
       <tag priority="-100" name="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver">controller.argument_value_resolver</tag>
@@ -3581,7 +3614,7 @@
     </service>
     <service id="argument_resolver.not_tagged_controller" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
       <tag name="controller.argument_value_resolver" priority="-200"/>
-      <argument type="service" id=".service_locator.O7GileC"/>
+      <argument type="service" id=".service_locator.0iFFrHK"/>
     </service>
     <service id="debug.log_processor" class="Symfony\Bridge\Monolog\Processor\DebugProcessor">
       <tag name="kernel.reset" method="reset"/>
@@ -5180,8 +5213,20 @@
       </call>
     </service>
     <service id="doctrine.dbal.default_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
-      <argument type="service" id=".service_locator.MfxSDRP"/>
+      <argument type="service" id=".service_locator..fFzDwH"/>
       <argument type="collection">
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preUpdate</argument>
+          </argument>
+          <argument>vich_uploader.listener.clean.products</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preUpdate</argument>
+          </argument>
+          <argument>vich_uploader.listener.clean.blog</argument>
+        </argument>
         <argument type="collection">
           <argument type="collection">
             <argument>postGenerateSchema</argument>
@@ -5235,6 +5280,54 @@
             <argument>postFlush</argument>
           </argument>
           <argument>turbo.doctrine.event_listener</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preRemove</argument>
+          </argument>
+          <argument>vich_uploader.listener.remove.products</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>postFlush</argument>
+          </argument>
+          <argument>vich_uploader.listener.remove.products</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>prePersist</argument>
+          </argument>
+          <argument>vich_uploader.listener.upload.products</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preUpdate</argument>
+          </argument>
+          <argument>vich_uploader.listener.upload.products</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preRemove</argument>
+          </argument>
+          <argument>vich_uploader.listener.remove.blog</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>postFlush</argument>
+          </argument>
+          <argument>vich_uploader.listener.remove.blog</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>prePersist</argument>
+          </argument>
+          <argument>vich_uploader.listener.upload.blog</argument>
+        </argument>
+        <argument type="collection">
+          <argument type="collection">
+            <argument>preUpdate</argument>
+          </argument>
+          <argument>vich_uploader.listener.upload.blog</argument>
         </argument>
       </argument>
     </service>
@@ -7543,6 +7636,12 @@
       <argument type="service" id="symfonycasts.verify_email.token_generator"/>
       <argument>3600</argument>
     </service>
+    <service id="Vich\UploaderBundle\Naming\SmartUniqueNamer.products" class="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
+    <service id="Vich\UploaderBundle\Naming\SmartUniqueNamer.blog" class="Vich\UploaderBundle\Naming\SmartUniqueNamer" public="true">
+      <argument type="service" id="Vich\UploaderBundle\Util\Transliterator"/>
+    </service>
     <service id="vich_uploader.adapter.mongodb" class="Vich\UploaderBundle\Adapter\ODM\MongoDB\MongoDBAdapter"/>
     <service id="vich_uploader.adapter.orm" class="Vich\UploaderBundle\Adapter\ORM\DoctrineORMAdapter"/>
     <service id="vich_uploader.adapter.phpcr" class="Vich\UploaderBundle\Adapter\PHPCR\PHPCRAdapter"/>
@@ -7685,7 +7784,7 @@
     </service>
     <service id="vich_uploader.property_mapping_resolver" class="Vich\UploaderBundle\Mapping\PropertyMappingResolver">
       <argument type="service" id="service_container"/>
-      <argument type="collection"/>
+      <argument>%vich_uploader.mappings%</argument>
       <argument>_name</argument>
     </service>
     <service id="vich_uploader.property_mapping_factory" class="Vich\UploaderBundle\Mapping\PropertyMappingFactory">
@@ -7737,7 +7836,7 @@
     <service id="vich_uploader.command.mapping_debug" class="Vich\UploaderBundle\Command\MappingDebugCommand">
       <tag name="console.command" command="vich:mapping:debug"/>
       <tag name="container.no_preload"/>
-      <argument type="collection"/>
+      <argument>%vich_uploader.mappings%</argument>
       <call method="setName">
         <argument>vich:mapping:debug</argument>
       </call>
@@ -7781,6 +7880,52 @@
       <argument type="service" id="Vich\UploaderBundle\Templating\Helper\UploaderHelper"/>
     </service>
     <service id="vich_uploader.metadata.reader" class="Vich\UploaderBundle\Metadata\Driver\AttributeReader"/>
+    <service id="vich_uploader.listener.clean.products" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener">
+      <tag name="doctrine.event_listener" event="preUpdate" priority="50"/>
+      <argument>products</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.products" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener">
+      <tag name="doctrine.event_listener" event="preRemove" priority="0"/>
+      <tag name="doctrine.event_listener" event="postFlush" priority="0"/>
+      <argument>products</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.products" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener">
+      <tag name="doctrine.event_listener" event="prePersist" priority="0"/>
+      <tag name="doctrine.event_listener" event="preUpdate" priority="0"/>
+      <argument>products</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.clean.blog" class="Vich\UploaderBundle\EventListener\Doctrine\CleanListener">
+      <tag name="doctrine.event_listener" event="preUpdate" priority="50"/>
+      <argument>blog</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.remove.blog" class="Vich\UploaderBundle\EventListener\Doctrine\RemoveListener">
+      <tag name="doctrine.event_listener" event="preRemove" priority="0"/>
+      <tag name="doctrine.event_listener" event="postFlush" priority="0"/>
+      <argument>blog</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
+    <service id="vich_uploader.listener.upload.blog" class="Vich\UploaderBundle\EventListener\Doctrine\UploadListener">
+      <tag name="doctrine.event_listener" event="prePersist" priority="0"/>
+      <tag name="doctrine.event_listener" event="preUpdate" priority="0"/>
+      <argument>blog</argument>
+      <argument type="service" id="vich_uploader.adapter.orm"/>
+      <argument type="service" id="vich_uploader.metadata_reader"/>
+      <argument type="service" id="vich_uploader.upload_handler"/>
+    </service>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\Admin\ArticleController" class="App\Controller\Admin\ArticleController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\Admin\ArticleController" class="App\Controller\Admin\ArticleController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\Admin\ArticleController" class="App\Controller\Admin\ArticleController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -8393,7 +8538,7 @@
         <argument key="mailer" type="service_closure" id="mailer.mailer"/>
       </argument>
     </service>
-    <service id=".service_locator.O7GileC" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.0iFFrHK" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\Admin\ArticleController::delete" type="service_closure" id=".service_locator.zwPUnYq"/>
@@ -8424,6 +8569,7 @@
         <argument key="App\Controller\HomeController::blog" type="service_closure" id=".service_locator.2E82jv_"/>
         <argument key="App\Controller\HomeController::contact" type="service_closure" id=".service_locator.WZeIXfO"/>
         <argument key="App\Controller\HomeController::index" type="service_closure" id=".service_locator.yXwGmc1"/>
+        <argument key="App\Controller\HomeController::product" type="service_closure" id=".service_locator.DZowHzb"/>
         <argument key="App\Controller\OrderController::order" type="service_closure" id=".service_locator.ScHRZwp"/>
         <argument key="App\Controller\SingleArticleController::index" type="service_closure" id=".service_locator.XqCCpgA"/>
         <argument key="App\Kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -8458,6 +8604,7 @@
         <argument key="App\Controller\HomeController:blog" type="service_closure" id=".service_locator.2E82jv_"/>
         <argument key="App\Controller\HomeController:contact" type="service_closure" id=".service_locator.WZeIXfO"/>
         <argument key="App\Controller\HomeController:index" type="service_closure" id=".service_locator.yXwGmc1"/>
+        <argument key="App\Controller\HomeController:product" type="service_closure" id=".service_locator.DZowHzb"/>
         <argument key="App\Controller\OrderController:order" type="service_closure" id=".service_locator.ScHRZwp"/>
         <argument key="App\Controller\SingleArticleController:index" type="service_closure" id=".service_locator.XqCCpgA"/>
         <argument key="kernel:loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
@@ -8745,7 +8892,7 @@
       <argument type="service" id="http_client.uri_template"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
     </service>
-    <service id=".service_locator.MfxSDRP" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator..fFzDwH" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
@@ -8755,6 +8902,12 @@
         <argument key="doctrine.orm.listeners.pdo_session_handler_schema_listener" type="service_closure" id="doctrine.orm.listeners.pdo_session_handler_schema_listener"/>
         <argument key="doctrine.orm.messenger.doctrine_schema_listener" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_listener"/>
         <argument key="turbo.doctrine.event_listener" type="service_closure" id="turbo.doctrine.event_listener"/>
+        <argument key="vich_uploader.listener.clean.blog" type="service_closure" id="vich_uploader.listener.clean.blog"/>
+        <argument key="vich_uploader.listener.clean.products" type="service_closure" id="vich_uploader.listener.clean.products"/>
+        <argument key="vich_uploader.listener.remove.blog" type="service_closure" id="vich_uploader.listener.remove.blog"/>
+        <argument key="vich_uploader.listener.remove.products" type="service_closure" id="vich_uploader.listener.remove.products"/>
+        <argument key="vich_uploader.listener.upload.blog" type="service_closure" id="vich_uploader.listener.upload.blog"/>
+        <argument key="vich_uploader.listener.upload.products" type="service_closure" id="vich_uploader.listener.upload.products"/>
       </argument>
     </service>
     <service id=".service_locator.yyse1st" class="Symfony\Component\DependencyInjection\ServiceLocator">
@@ -10798,7 +10951,7 @@
     <service id="Vich\UploaderBundle\Form\Type\VichImageType" alias="vich_uploader.form.type.image"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.w7.f4fT" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.O7GileC"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.0iFFrHK"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10824,10 +10977,10 @@
     <service id=".service_locator.bJ.4HC5" alias=".service_locator.w7.f4fT"/>
     <service id=".service_locator.oZvIfEr" alias=".service_locator.N7dcDh9"/>
     <service id=".service_locator.6TOd91V" alias=".service_locator.ScHRZwp"/>
-    <service id=".service_locator._XuE2T6" alias=".service_locator.O7GileC"/>
+    <service id=".service_locator.SxxKn3G" alias=".service_locator.0iFFrHK"/>
     <service id=".service_locator.BFrsqsn" alias=".service_locator.F9PKc.7"/>
     <service id=".service_locator.cFwinM6" alias=".service_locator.aHKeIJ5"/>
-    <service id=".service_locator.XtmiKbi" alias=".service_locator.MfxSDRP"/>
+    <service id=".service_locator.VxBWhC7" alias=".service_locator..fFzDwH"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.jUv.zyj" alias=".service_locator.O2p6Lk7"/>
     <service id="validator" alias="debug.validator"/>

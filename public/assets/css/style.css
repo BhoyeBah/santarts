@@ -295,7 +295,12 @@ section {
 .page-header.page-header-blog{
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
 }
-
+.page-header.page-header-cart{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
+}
+.page-header.page-header-commande{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(../images/page-header-blog.jpg);
+}
 .page-header .container {
     max-width: 1000px;
     margin: 0 auto;

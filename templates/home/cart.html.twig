@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CartController!{% endblock %}
+{% block title %}Panier{% endblock %}
 
 {% block body %}
 
 <div class="main-container">
-    <section class="page-header">
+    <section class="page-header page-header-cart">
         <div class="container">
-            <h1 class="page-title">Titre de la Page</h1>
-            <p class="page-subtitle">Une petite description ou un breadcrumb ici</p>
+            <h1 class="page-title">Votre Panier</h1>
+            <p class="page-subtitle">Consultez vos articles avant de commander.</p>
             <nav class="breadcrumb">
                 <ul>
                     <li class="breadcrumb-item">
@@ -64,8 +64,6 @@
         <!-- Actions -->
         <div class="actions">
             <div>
-                <input type="text" placeholder="Coupon Code">
-                <button>Apply Coupon</button>
             </div>
             <form action="{{ path('app_cart_remove') }}">
                 <button type="submit">Vider le panier</button>
