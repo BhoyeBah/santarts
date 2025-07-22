@@ -87,6 +87,10 @@ class CartService
 
         $totalQuantity = 0;
 
+        if (!isset($panier)) {
+            return $totalQuantity;
+        }
+        
         foreach ($panier as $item) {
             if (isset($item['quantity'])) {
                 $totalQuantity += $item['quantity'];
