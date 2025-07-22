@@ -37,11 +37,21 @@
             </a>
             <nav class="navbar">
                 <ul>
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="{{ path('app_about') }}">A propos</a></li>
-                    <li><a href="{{ path('app_product') }}">Produit</a></li>
-                    <li><a href="{{ path('app_blog') }}">Blog</a></li>
-                    <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                    <li>
+                        <a href="/" class="{% block home %}{% endblock %}">Accueil</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_about') }}" class="{% block about %}{% endblock %}">A propos</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_product') }}" class="{% block product %}{% endblock %}">Produit</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_blog') }}" class="{% block blog %}{% endblock %}">Blog</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_contact') }}" class="{% block contact %}{% endblock %}">Contact</a>
+                    </li>
                 </ul>
             </nav>
             <div class="navbar-icons">

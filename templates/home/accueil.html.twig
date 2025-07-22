@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% block home %}active{% endblock %}
 {% block title %}Accueil!{% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
                         offres</p>
                     <h1 class="wow animate__animated animate__fadeInUp animate__delay-0_5s">Commandez vos
                         produits<br> au meilleur prix</h1>
-                    <a href="product.html"
+                    <a href="{{ path('app_product') }}"
                         class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">Acheter</a>
                 </div>
             </div>
@@ -28,7 +28,7 @@
                         pour vous</p>
                     <h1 class="wow animate__animated animate__fadeInUp animate__delay-0_5s">Découvrez nos
                         conseils,<br>tendances et actualités</h1>
-                    <a href="blog.html" class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">Lire
+                    <a href="{{ path('app_blog') }}" class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">Lire
                         les articles</a>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                         événements à venir</p>
                     <h1 class="wow animate__animated animate__fadeInUp animate__delay-0_5s">Réservez votre
                         place<br>pour des expériences uniques</h1>
-                    <a href="evenement.html"
+                    <a href="#"
                         class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">Voir les
                         événements</a>
                 </div>
@@ -88,7 +88,7 @@
                 </p>
             </div>
         </div>
-        <a href="about.html" class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">
+        <a href="{{ path('app_about') }}" class="btn wow animate__animated animate__fadeInUp animate__delay-0_5s">
             Lire plus...
         </a>
     </section>

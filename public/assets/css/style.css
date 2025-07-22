@@ -270,6 +270,9 @@ section {
     color: var(--primary);
 }
 
+.header .header-nav .navbar ul li a.active {
+    color: var(--primary);
+}
 /************** css header nav end***********************/
 
 /************ Page header section **********************/
